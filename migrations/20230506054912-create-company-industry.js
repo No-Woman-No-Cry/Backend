@@ -11,6 +11,7 @@ module.exports = {
       },
       company_id: {
         type: Sequelize.BIGINT,
+        allowNull: false,
         references: {
           model: "Companies",
           key: "id",
@@ -20,6 +21,7 @@ module.exports = {
       },
       industry_id: {
         type: Sequelize.BIGINT,
+        allowNull: false,
         references: {
           model: "Industries",
           key: "id",

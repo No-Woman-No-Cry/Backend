@@ -2,28 +2,28 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("CompanyBenefits", {
+    await queryInterface.createTable("JobSkills", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      company_id: {
+      skill_id: {
         type: Sequelize.BIGINT,
         allowNull: false,
         references: {
-          model: "Companies",
+          model: "Skills",
           key: "id",
         },
         onUpdate: "CASCADE",
         onDelete: "CASCADE",
       },
-      benefit_id: {
+      job_id: {
         type: Sequelize.BIGINT,
         allowNull: false,
         references: {
-          model: "Benefits",
+          model: "Jobs",
           key: "id",
         },
         onUpdate: "CASCADE",
@@ -38,23 +38,23 @@ module.exports = {
         type: Sequelize.DATE,
       },
     });
-    await queryInterface.addConstraint("CompanyBenefits", {
+    await queryInterface.addConstraint("JobSkills", {
       type: "foreign key",
-      fields: ["company_id"],
-      name: "company_benefits_company_id_fkey",
+      fields: ["skill_id"],
+      name: "job_skills_skill_id_fkey",
       references: {
-        table: "Companies",
+        table: "Skills",
         field: "id",
       },
       onDelete: "CASCADE",
       onUpdate: "CASCADE",
     });
-    await queryInterface.addConstraint("CompanyBenefits", {
+    await queryInterface.addConstraint("JobSkills", {
       type: "foreign key",
-      fields: ["benefit_id"],
-      name: "company_benefits_benefit_id_fkey",
+      fields: ["job_id"],
+      name: "job_skills_job_id_fkey",
       references: {
-        table: "Benefits",
+        table: "Jobs",
         field: "id",
       },
       onDelete: "CASCADE",
@@ -62,6 +62,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("CompanyBenefits");
+    await queryInterface.dropTable("JobSkills");
   },
 };

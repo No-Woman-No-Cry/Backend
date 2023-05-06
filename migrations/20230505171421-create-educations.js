@@ -11,6 +11,7 @@ module.exports = {
       },
       job_seeker_id: {
         type: Sequelize.BIGINT,
+        allowNull: false,
         references: {
           model: "JobSeekers",
           key: "id",

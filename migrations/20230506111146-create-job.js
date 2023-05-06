@@ -2,7 +2,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("CompanyBenefits", {
+    await queryInterface.createTable("Jobs", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -19,15 +19,37 @@ module.exports = {
         onUpdate: "CASCADE",
         onDelete: "CASCADE",
       },
-      benefit_id: {
+      job_category_id: {
         type: Sequelize.BIGINT,
         allowNull: false,
         references: {
-          model: "Benefits",
+          model: "JobCategories",
           key: "id",
         },
         onUpdate: "CASCADE",
         onDelete: "CASCADE",
+      },
+      job_position: {
+        type: Sequelize.STRING,
+      },
+      job_salary_id: {
+        type: Sequelize.BIGINT,
+        allowNull: false,
+        references: {
+          model: "JobSalaries",
+          key: "id",
+        },
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
+      },
+      job_work_place: {
+        type: Sequelize.ENUM("office", "factory", "warehouse"),
+      },
+      job_description: {
+        type: Sequelize.TEXT,
+      },
+      job_requirements: {
+        type: Sequelize.TEXT,
       },
       created_at: {
         allowNull: false,
@@ -38,10 +60,10 @@ module.exports = {
         type: Sequelize.DATE,
       },
     });
-    await queryInterface.addConstraint("CompanyBenefits", {
+    await queryInterface.addConstraint("Jobs", {
       type: "foreign key",
       fields: ["company_id"],
-      name: "company_benefits_company_id_fkey",
+      name: "jobs_company_id_fkey",
       references: {
         table: "Companies",
         field: "id",
@@ -49,12 +71,23 @@ module.exports = {
       onDelete: "CASCADE",
       onUpdate: "CASCADE",
     });
-    await queryInterface.addConstraint("CompanyBenefits", {
+    await queryInterface.addConstraint("Jobs", {
       type: "foreign key",
-      fields: ["benefit_id"],
-      name: "company_benefits_benefit_id_fkey",
+      fields: ["job_category_id"],
+      name: "jobs_job_category_id_fkey",
       references: {
-        table: "Benefits",
+        table: "JobCategories",
+        field: "id",
+      },
+      onDelete: "CASCADE",
+      onUpdate: "CASCADE",
+    });
+    await queryInterface.addConstraint("Jobs", {
+      type: "foreign key",
+      fields: ["job_salary_id"],
+      name: "jobs_job_salary_id_fkey",
+      references: {
+        table: "JobSalaries",
         field: "id",
       },
       onDelete: "CASCADE",
@@ -62,6 +95,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("CompanyBenefits");
+    await queryInterface.dropTable("Jobs");
   },
 };

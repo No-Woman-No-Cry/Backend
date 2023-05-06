@@ -2,37 +2,25 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("WorkingExperiences", {
+    await queryInterface.createTable("JobApplyStatuses", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      job_seeker_id: {
+      job_apply_id: {
         type: Sequelize.BIGINT,
         allowNull: false,
         references: {
-          model: "JobSeekers",
+          model: "JobApplies",
           key: "id",
         },
         onUpdate: "CASCADE",
         onDelete: "CASCADE",
       },
-      company_name: {
-        type: Sequelize.STRING,
-      },
-      position: {
-        type: Sequelize.STRING,
-      },
-      job_desc: {
-        type: Sequelize.TEXT,
-      },
-      start: {
-        type: Sequelize.DATE,
-      },
-      end: {
-        type: Sequelize.DATE,
+      status: {
+        type: Sequelize.ENUM("pending", "accepted", "rejected"),
       },
       created_at: {
         allowNull: false,
@@ -43,12 +31,12 @@ module.exports = {
         type: Sequelize.DATE,
       },
     });
-    await queryInterface.addConstraint("WorkingExperiences", {
+    await queryInterface.addConstraint("JobApplyStatuses", {
       type: "foreign key",
-      fields: ["job_seeker_id"],
-      name: "working_experiences_job_seeker_id_fkey",
+      fields: ["job_apply_id"],
+      name: "job_apply_statuses_job_apply_id_fkey",
       references: {
-        table: "JobSeekers",
+        table: "JobApplies",
         field: "id",
       },
       onDelete: "CASCADE",
@@ -56,6 +44,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("WorkingExperiences");
+    await queryInterface.dropTable("JobApplyStatuses");
   },
 };

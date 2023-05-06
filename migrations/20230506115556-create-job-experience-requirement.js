@@ -2,28 +2,28 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("CompanyBenefits", {
+    await queryInterface.createTable("JobExperienceRequirements", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      company_id: {
+      job_id: {
         type: Sequelize.BIGINT,
         allowNull: false,
         references: {
-          model: "Companies",
+          model: "Jobs",
           key: "id",
         },
         onUpdate: "CASCADE",
         onDelete: "CASCADE",
       },
-      benefit_id: {
+      job_experience_id: {
         type: Sequelize.BIGINT,
         allowNull: false,
         references: {
-          model: "Benefits",
+          model: "JobExperiences",
           key: "id",
         },
         onUpdate: "CASCADE",
@@ -38,23 +38,23 @@ module.exports = {
         type: Sequelize.DATE,
       },
     });
-    await queryInterface.addConstraint("CompanyBenefits", {
+    await queryInterface.addConstraint("JobExperienceRequirements", {
       type: "foreign key",
-      fields: ["company_id"],
-      name: "company_benefits_company_id_fkey",
+      fields: ["job_id"],
+      name: "job_experience_requirements_job_id_fkey",
       references: {
-        table: "Companies",
+        table: "Jobs",
         field: "id",
       },
       onDelete: "CASCADE",
       onUpdate: "CASCADE",
     });
-    await queryInterface.addConstraint("CompanyBenefits", {
+    await queryInterface.addConstraint("JobExperienceRequirements", {
       type: "foreign key",
-      fields: ["benefit_id"],
-      name: "company_benefits_benefit_id_fkey",
+      fields: ["job_experience_id"],
+      name: "job_experience_requirements_job_experience_id_fkey",
       references: {
-        table: "Benefits",
+        table: "JobExperiences",
         field: "id",
       },
       onDelete: "CASCADE",
@@ -62,6 +62,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("CompanyBenefits");
+    await queryInterface.dropTable("JobExperienceRequirements");
   },
 };
