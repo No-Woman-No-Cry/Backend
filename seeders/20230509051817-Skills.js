@@ -2,6 +2,7 @@
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
+  
   async up(queryInterface, Sequelize) {
     await queryInterface.sequelize.query(
       `ALTER SEQUENCE "Skills_id_seq" RESTART WITH 1`

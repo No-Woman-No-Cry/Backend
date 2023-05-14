@@ -3,6 +3,7 @@ const { hashPassword } = require("../src/utils/password/hashPassword");
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
+  
   async up(queryInterface, Sequelize) {
     const password = await hashPassword("password123");
     await queryInterface.sequelize.query(
