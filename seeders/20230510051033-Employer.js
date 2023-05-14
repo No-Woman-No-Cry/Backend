@@ -3,7 +3,6 @@ const { hashPassword } = require("../src/utils/password/hashPassword");
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  
   async up(queryInterface, Sequelize) {
     const password = await hashPassword("password123");
     await queryInterface.sequelize.query(
@@ -15,46 +14,44 @@ module.exports = {
       [
         {
           id: 1,
-          username: 'employer1',
-          password: 'password1',
+          username: "employer1",
+          password: password,
           company_id: 1,
           created_at: new Date(),
-          updated_at: new Date()
+          updated_at: new Date(),
         },
         {
           id: 2,
-          username: 'employer2',
-          password: 'password2',
+          username: "employer2",
+          password: password,
           company_id: 2,
           created_at: new Date(),
-          updated_at: new Date()
+          updated_at: new Date(),
         },
         {
           id: 3,
-          username: 'employer3',
-          password: 'password3',
+          username: "employer3",
+          password: password,
           company_id: 3,
           created_at: new Date(),
-          updated_at: new Date()
+          updated_at: new Date(),
         },
         {
           id: 4,
-          username: 'employer4',
-          password: 'password4',
+          username: "employer4",
+          password: password,
           company_id: 4,
           created_at: new Date(),
-          updated_at: new Date()
+          updated_at: new Date(),
         },
         {
           id: 5,
-          username: 'employer5',
-          password: 'password5',
+          username: "employer5",
+          password: password,
           company_id: 5,
           created_at: new Date(),
-          updated_at: new Date()
+          updated_at: new Date(),
         },
-        
-        // add more entries here...
       ],
       {}
     );
