@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 // Variables for job seeker
+const globalMiddleware = require("@middleware/globalMiddleware");
 const auth = require("./job-seeker/authentication/index");
 const profile = require("./job-seeker/profile/index");
 const main = require("./job-seeker/main_page/index");
@@ -14,6 +15,11 @@ app.use(bodyParser.json());
 
 // Routes for Job Seeker
 app.use("/auth", auth);
+
+// Middleware global, why "/auth" not use this middleware because it not requires middleware
+app.use(globalMiddleware.check);
+
+// Routes for Job Seeker
 app.use("/profile", profile);
 app.use("/main", main);
 app.use("/companies", companies);
