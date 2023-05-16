@@ -1,5 +1,7 @@
 "use strict";
 const { Model } = require("sequelize");
+const Job = require("./job");
+const JobType = require("./jobtype");
 module.exports = (sequelize, DataTypes) => {
   class JobTypeRequirement extends Model {
     /**
@@ -7,9 +9,7 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {
-      // define association here
-    }
+    static associate(models) {}
   }
   JobTypeRequirement.init(
     {
@@ -18,8 +18,22 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         autoIncrement: true,
       },
-      job_id: DataTypes.BIGINT,
-      job_type_id: DataTypes.BIGINT,
+      job_id: {
+        type: DataTypes.BIGINT,
+        allowNull: false,
+        references: {
+          model: Job,
+          key: "id",
+        },
+      },
+      job_type_id: {
+        type: DataTypes.BIGINT,
+        allowNull: false,
+        references: {
+          model: JobType,
+          key: "id",
+        },
+      },
     },
     {
       sequelize,
