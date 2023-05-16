@@ -3,6 +3,7 @@ const Company = require("@models").Company;
 const JobSalary = require("@models").JobSalary;
 const JobTypeRequirement = require("@models").JobTypeRequirement;
 const JobType = require("@models").JobType;
+const JobCategory = require("@models").JobCategory;
 class MainPageController {
   static async getAllJobs(req, res) {
     try {
@@ -61,8 +62,6 @@ class MainPageController {
         };
       });
 
-      // console.log(jobs[0].jobType[0].job_type_name);
-
       const response = {
         page: currentPage,
         total_pages: totalPages,
@@ -75,6 +74,23 @@ class MainPageController {
         success: true,
         message: "Job Fetched",
         data: response,
+      });
+    } catch (err) {
+      return res.status(500).json({
+        error: err.message,
+      });
+    }
+  }
+  static async getCategories(req, res) {
+    try {
+      const categories = await JobCategory.findAll({
+        attributes: ["id", "category_name"],
+      });
+      return res.status(200).json({
+        code: 200,
+        success: true,
+        message: "Categories Fetched",
+        data: categories,
       });
     } catch (err) {
       return res.status(500).json({
