@@ -1,4 +1,7 @@
 "use strict";
+const Company = require("./company");
+const JobSalary = require("./jobsalary");
+const JobTypeRequirement = require("./jobtyperequirement");
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Job extends Model {
@@ -8,7 +11,13 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      this.belongsTo(models.Company, { foreignKey: "company_id" });
+      this.belongsTo(models.JobSalary, { foreignKey: "job_salary_id" });
+      this.belongsToMany(models.JobType, {
+        through: models.JobTypeRequirement,
+        as: "jobType",
+        foreignKey: "job_id",
+      });
     }
   }
   Job.init(
@@ -18,10 +27,24 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         autoIncrement: true,
       },
-      company_id: DataTypes.BIGINT,
+      company_id: {
+        type: DataTypes.BIGINT,
+        allowNull: false,
+        references: {
+          model: Company,
+          key: "id",
+        },
+      },
       job_category_id: DataTypes.BIGINT,
       job_position: DataTypes.STRING,
-      job_salary_id: DataTypes.BIGINT,
+      job_salary_id: {
+        type: DataTypes.BIGINT,
+        allowNull: false,
+        references: {
+          model: JobSalary,
+          key: "id",
+        },
+      },
       job_work_place: DataTypes.ENUM("office", "factory", "warehouse"),
       job_description: DataTypes.TEXT,
       job_requirements: DataTypes.TEXT,
