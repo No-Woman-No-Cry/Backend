@@ -1,9 +1,11 @@
 const Job = require("@models").Job;
+
 const Company = require("@models").Company;
 const JobSalary = require("@models").JobSalary;
 const JobTypeRequirement = require("@models").JobTypeRequirement;
 const JobType = require("@models").JobType;
 const JobCategory = require("@models").JobCategory;
+
 class MainPageController {
   static async getAllJobs(req, res) {
     try {
@@ -14,6 +16,7 @@ class MainPageController {
       const totalPages = Math.ceil(totalItems / itemsPerPage);
 
       const jobs = await Job.findAll({
+
         attributes: ["id", "job_position", "job_work_place"],
         limit: itemsPerPage,
         offset: (currentPage - 1) * itemsPerPage,
@@ -66,9 +69,10 @@ class MainPageController {
         page: currentPage,
         total_pages: totalPages,
         total_jobs: totalItems,
+
         jobs: transformedJobs,
       };
-
+    
       return res.status(200).json({
         code: 200,
         success: true,
@@ -81,6 +85,7 @@ class MainPageController {
       });
     }
   }
+
   static async getCategories(req, res) {
     try {
       const categories = await JobCategory.findAll({
@@ -98,6 +103,7 @@ class MainPageController {
       });
     }
   }
+
 }
 
 module.exports = MainPageController;
