@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class JobApplyStatus extends Model {
     /**
@@ -13,13 +11,17 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  JobApplyStatus.init({
-    job_apply_id: DataTypes.BIGINT,
-    status: DataTypes.ENUM('pending', 'accepted', 'rejected')
-  }, {
-    sequelize,
-    modelName: 'JobApplyStatus',
-    underscored: true,
-  });
+  JobApplyStatus.init(
+    {
+      job_apply_id: DataTypes.BIGINT,
+      status: DataTypes.ENUM("pending", "accepted", "rejected"),
+    },
+    {
+      sequelize,
+      modelName: "JobApplyStatus",
+      tableName: "JobApplyStatuses",
+      underscored: true,
+    }
+  );
   return JobApplyStatus;
 };

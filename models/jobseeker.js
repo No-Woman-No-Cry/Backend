@@ -13,7 +13,10 @@ module.exports = (sequelize, DataTypes) => {
   }
   JobSeeker.init(
     {
-      id: DataTypes.BIGINT,
+      id: {
+        type: DataTypes.BIGINT,
+        primaryKey: true,
+      },
       user_id: DataTypes.BIGINT,
       fullname: DataTypes.STRING,
       job_seeker_headline: DataTypes.STRING,
@@ -25,6 +28,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: "JobSeeker",
+      tableName: "JobSeeker",
       underscored: true,
     }
   );

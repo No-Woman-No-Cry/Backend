@@ -18,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'JobCategory',
+    tableName: "JobCategories",
     underscored: true,
   });
   return JobCategory;

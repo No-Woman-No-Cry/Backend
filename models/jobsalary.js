@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class JobSalary extends Model {
     /**
@@ -13,13 +11,17 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  JobSalary.init({
-    minimum_salary: DataTypes.STRING,
-    maximum_salary: DataTypes.STRING
-  }, {
-    sequelize,
-    modelName: 'JobSalary',
-    underscored: true,
-  });
+  JobSalary.init(
+    {
+      minimum_salary: DataTypes.STRING,
+      maximum_salary: DataTypes.STRING,
+    },
+    {
+      sequelize,
+      modelName: "JobSalary",
+      tableName: "JobSalaries",
+      underscored: true,
+    }
+  );
   return JobSalary;
 };

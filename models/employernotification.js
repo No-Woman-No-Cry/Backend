@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class EmployerNotification extends Model {
     /**
@@ -13,15 +11,19 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  EmployerNotification.init({
-    employer_id: DataTypes.BIGINT,
-    notification_message: DataTypes.STRING,
-    notification_date: DataTypes.DATE,
-    is_read: DataTypes.BOOLEAN
-  }, {
-    sequelize,
-    modelName: 'EmployerNotification',
-    underscored: true,
-  });
+  EmployerNotification.init(
+    {
+      employer_id: DataTypes.BIGINT,
+      notification_message: DataTypes.STRING,
+      notification_date: DataTypes.DATE,
+      is_read: DataTypes.BOOLEAN,
+    },
+    {
+      sequelize,
+      modelName: "EmployerNotification",
+      tableName: "EmployerNotifications",
+      underscored: true,
+    }
+  );
   return EmployerNotification;
 };
