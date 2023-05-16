@@ -4,9 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "nodemon index.js",
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "migrate": "npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
     "drop-migrate": "npx sequelize-cli db:migrate:undo:all"
+  },
+  "_moduleAliases": {
+    "@controllers": "src/controllers",
+    "@models": "models",
+    "@services": "src/services",
+    "@utils": "src/utils"
   },
   "repository": {
     "type": "git",
@@ -28,6 +36,7 @@
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.0",
+    "module-alias": "^2.2.2",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.22",
     "pg": "^8.10.0",
