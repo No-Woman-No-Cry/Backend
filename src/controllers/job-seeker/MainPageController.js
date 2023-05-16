@@ -66,6 +66,7 @@ class MainPageController {
         page: currentPage,
         total_pages: totalPages,
         total_jobs: totalItems,
+
         jobs: transformedJobs,
       };
 
