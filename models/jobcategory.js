@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      this.hasMany(models.Job, { foreignKey: "job_category_id" });
     }
   }
   JobCategory.init(
@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         autoIncrement: true,
       },
-      categoty_name: DataTypes.STRING,
+      category_name: DataTypes.STRING,
     },
     {
       sequelize,

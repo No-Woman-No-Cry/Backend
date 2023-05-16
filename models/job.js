@@ -2,6 +2,7 @@
 const Company = require("./company");
 const JobSalary = require("./jobsalary");
 const JobTypeRequirement = require("./jobtyperequirement");
+const JobCategory = require("./jobcategory");
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Job extends Model {
@@ -13,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       this.belongsTo(models.Company, { foreignKey: "company_id" });
       this.belongsTo(models.JobSalary, { foreignKey: "job_salary_id" });
+      this.belongsTo(models.JobCategory, { foreignKey: "job_category_id" });
       this.belongsToMany(models.JobType, {
         through: models.JobTypeRequirement,
         as: "jobType",
@@ -35,7 +37,14 @@ module.exports = (sequelize, DataTypes) => {
           key: "id",
         },
       },
-      job_category_id: DataTypes.BIGINT,
+      job_category_id: {
+        type: DataTypes.BIGINT,
+        allowNull: false,
+        references: {
+          model: JobCategory,
+          key: "id",
+        },
+      },
       job_position: DataTypes.STRING,
       job_salary_id: {
         type: DataTypes.BIGINT,
