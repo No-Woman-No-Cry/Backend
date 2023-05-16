@@ -13,6 +13,11 @@ module.exports = (sequelize, DataTypes) => {
   }
   JobSkill.init(
     {
+      id: {
+        type: DataTypes.BIGINT,
+        primaryKey: true,
+        autoIncrement: true,
+      },
       skill_id: DataTypes.BIGINT,
       job_id: DataTypes.BIGINT,
     },

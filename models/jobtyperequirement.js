@@ -13,6 +13,11 @@ module.exports = (sequelize, DataTypes) => {
   }
   JobTypeRequirement.init(
     {
+      id: {
+        type: DataTypes.BIGINT,
+        primaryKey: true,
+        autoIncrement: true,
+      },
       job_id: DataTypes.BIGINT,
       job_type_id: DataTypes.BIGINT,
     },

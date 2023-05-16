@@ -13,6 +13,11 @@ module.exports = (sequelize, DataTypes) => {
   }
   JobSalary.init(
     {
+      id: {
+        type: DataTypes.BIGINT,
+        primaryKey: true,
+        autoIncrement: true,
+      },
       minimum_salary: DataTypes.STRING,
       maximum_salary: DataTypes.STRING,
     },

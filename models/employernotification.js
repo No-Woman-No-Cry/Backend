@@ -13,6 +13,11 @@ module.exports = (sequelize, DataTypes) => {
   }
   EmployerNotification.init(
     {
+      id: {
+        type: DataTypes.BIGINT,
+        primaryKey: true,
+        autoIncrement: true,
+      },
       employer_id: DataTypes.BIGINT,
       notification_message: DataTypes.STRING,
       notification_date: DataTypes.DATE,

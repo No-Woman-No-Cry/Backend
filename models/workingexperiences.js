@@ -13,6 +13,11 @@ module.exports = (sequelize, DataTypes) => {
   }
   WorkingExperiences.init(
     {
+      id: {
+        type: DataTypes.BIGINT,
+        primaryKey: true,
+        autoIncrement: true,
+      },
       job_seeker_id: DataTypes.BIGINT,
       company_name: DataTypes.STRING,
       position: DataTypes.STRING,

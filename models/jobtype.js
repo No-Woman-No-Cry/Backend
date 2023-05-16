@@ -13,6 +13,11 @@ module.exports = (sequelize, DataTypes) => {
   }
   JobType.init(
     {
+      id: {
+        type: DataTypes.BIGINT,
+        primaryKey: true,
+        autoIncrement: true,
+      },
       job_type_name: DataTypes.ENUM("fulltime", "parttime", "intern"),
     },
     {

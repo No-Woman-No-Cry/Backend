@@ -13,6 +13,11 @@ module.exports = (sequelize, DataTypes) => {
   }
   Skill.init(
     {
+      id: {
+        type: DataTypes.BIGINT,
+        primaryKey: true,
+        autoIncrement: true,
+      },
       skill_name: DataTypes.STRING,
     },
     {

@@ -1,4 +1,5 @@
 "use strict";
+const JobSeeker = require("./jobseeker");
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
@@ -8,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      this.hasMany(models.JobSeeker, { foreignKey: "user_id" });
     }
   }
   User.init(
@@ -16,6 +17,7 @@ module.exports = (sequelize, DataTypes) => {
       id: {
         type: DataTypes.BIGINT,
         primaryKey: true,
+        autoIncrement: true,
       },
       email: DataTypes.STRING,
       password: DataTypes.STRING,
@@ -27,5 +29,6 @@ module.exports = (sequelize, DataTypes) => {
       underscored: true,
     }
   );
+
   return User;
 };

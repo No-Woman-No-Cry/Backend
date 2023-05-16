@@ -13,6 +13,11 @@ module.exports = (sequelize, DataTypes) => {
   }
   JobApplyStatus.init(
     {
+      id: {
+        type: DataTypes.BIGINT,
+        primaryKey: true,
+        autoIncrement: true,
+      },
       job_apply_id: DataTypes.BIGINT,
       status: DataTypes.ENUM("pending", "accepted", "rejected"),
     },

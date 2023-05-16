@@ -13,6 +13,11 @@ module.exports = (sequelize, DataTypes) => {
   }
   Company.init(
     {
+      id: {
+        type: DataTypes.BIGINT,
+        primaryKey: true,
+        autoIncrement: true,
+      },
       company_icon: DataTypes.STRING,
       company_name: DataTypes.STRING,
       description: DataTypes.TEXT,

@@ -13,6 +13,11 @@ module.exports = (sequelize, DataTypes) => {
   }
   UserNotifications.init(
     {
+      id: {
+        type: DataTypes.BIGINT,
+        primaryKey: true,
+        autoIncrement: true,
+      },
       user_id: DataTypes.BIGINT,
       notification_message: DataTypes.STRING,
       notification_date: DataTypes.DATE,
