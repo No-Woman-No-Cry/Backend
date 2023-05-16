@@ -38,7 +38,13 @@ class AuthenticationController {
               message: "Password incorrect",
             });
           }
-          const token = jwt.sign({ user_id: data.id }, process.env.JWT_SECRET);
+          const token = jwt.sign(
+            {
+              type: "job-seeker",
+              user_id: data.id,
+            },
+            process.env.JWT_SECRET
+          );
 
           res.status(200).json({
             code: 200,
