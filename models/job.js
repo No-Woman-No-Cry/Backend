@@ -20,6 +20,16 @@ module.exports = (sequelize, DataTypes) => {
         as: "jobType",
         foreignKey: "job_id",
       });
+      this.belongsToMany(models.JobExperience, {
+        through: models.JobExperienceRequirement,
+        as: "jobExperience",
+        foreignKey: "job_id",
+      });
+      this.belongsToMany(models.Skill, {
+        through: models.JobSkill,
+        as: "skill",
+        foreignKey: "job_id",
+      });
     }
   }
   Job.init(
