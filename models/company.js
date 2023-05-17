@@ -9,6 +9,16 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       this.hasMany(models.Job, { foreignKey: "company_id" });
+      this.belongsToMany(models.Benefit, {
+        through: models.CompanyBenefits,
+        as: "benefit",
+        foreignKey: "company_id",
+      });
+      this.belongsToMany(models.Industry, {
+        through: models.CompanyIndustry,
+        as: "industry",
+        foreignKey: "company_id",
+      });
     }
   }
   Company.init(
