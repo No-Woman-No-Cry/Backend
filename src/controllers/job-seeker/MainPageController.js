@@ -1,3 +1,5 @@
+const { Op } = require("sequelize");
+
 const Job = require("@models").Job;
 const Company = require("@models").Company;
 const JobSalary = require("@models").JobSalary;
@@ -13,11 +15,49 @@ class MainPageController {
       const totalItems = await Job.count();
       const totalPages = Math.ceil(totalItems / itemsPerPage);
 
+      const job_type_keyword = {};
+
+      if (req.query.jobType) {
+        job_type_keyword.job_type_name = req.query.jobType;
+      }
+
+      const job_category_id_keyword = {};
+
+      if (req.query.categoryId) {
+        job_category_id_keyword.id = req.query.categoryId;
+      }
+
+      const whereClause = {};
+
+      // Menambahkan kondisi pencarian berdasarkan job_position jika ada
+      if (req.query.searchJob) {
+        whereClause[Op.or] = [
+          {
+            job_position: {
+              [Op.like]: `%${req.query.searchJob}%`,
+            },
+          },
+          {
+            "$Company.company_name$": {
+              [Op.like]: `%${req.query.searchJob}%`,
+            },
+          },
+        ];
+      }
+
+      // Menambahkan kondisi pencarian berdasarkan job_work_place jika ada
+      if (req.query.workPlace) {
+        whereClause.job_work_place = req.query.workPlace;
+      }
+
       const jobs = await Job.findAll({
         attributes: ["id", "job_position", "job_work_place"],
-        limit: itemsPerPage,
-        offset: (currentPage - 1) * itemsPerPage,
         include: [
+          {
+            model: JobCategory,
+            attributes: ["category_name"],
+            where: job_category_id_keyword,
+          },
           {
             model: Company,
             attributes: ["company_name", "company_icon", "location"],
@@ -29,9 +69,10 @@ class MainPageController {
           {
             model: JobType,
             as: "jobType",
-            // attributes: ["minimum_salary", "maximum_salary"],
+            where: job_type_keyword,
           },
         ],
+        where: whereClause,
       });
 
       // Transformasi jobs
@@ -39,7 +80,7 @@ class MainPageController {
         let jobTypeString = "";
         const transformJobType = job.jobType
           .map((jt) => jt.job_type_name)
-          .join(" , ");
+          .join(", ");
         /**
          "id": 1,
           "job_title": "Software Engineer",
@@ -53,6 +94,7 @@ class MainPageController {
         return {
           id: id,
           job_title: job_position,
+          job_category: job.JobCategory.category_name,
           company_name: job.Company.company_name,
           company_icon: job.Company.company_icon,
           location: job.Company.location,
@@ -77,6 +119,7 @@ class MainPageController {
         data: response,
       });
     } catch (err) {
+      console.error(err);
       return res.status(500).json({
         error: err.message,
       });
@@ -98,6 +141,30 @@ class MainPageController {
         error: err.message,
       });
     }
+  }
+  static async sortJobs() {
+    const itemsPerPage = req.query.limit; // Jumlah item yang ingin ditampilkan per halaman
+    const currentPage = req.query.page; // Halaman saat ini yang ingin ditampilkan
+
+    const totalItems = await Job.count();
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+    const jobs = await Job.findAll({
+      attributes: ["id", "job_position", "job_work_place"],
+      limit: itemsPerPage,
+      offset: (currentPage - 1) * itemsPerPage,
+      include: [
+        {
+          model: Company,
+          attributes: ["company_name", "company_icon", "location"],
+        },
+        {
+          model: JobType,
+          as: "jobType",
+          // attributes: ["minimum_salary", "maximum_salary"],
+        },
+      ],
+    });
   }
 }
 
