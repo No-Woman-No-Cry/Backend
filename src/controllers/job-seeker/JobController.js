@@ -2,6 +2,8 @@ const Job = require("@models").Job;
 const JobType = require("@models").JobType;
 const JobSalary = require("@models").JobSalary;
 const JobExperience = require("@models").JobExperience;
+const JobApply = require("@models").JobApply;
+const JobApplyStatus = require("@models").JobApplyStatus;
 const Company = require("@models").Company;
 const Skill = require("@models").Skill;
 const Benefit = require("@models").Benefit;
@@ -110,6 +112,38 @@ class JobController {
           success: true,
           message: "Job Fetched",
           data: response,
+        });
+      } catch (err) {
+        console.error(err);
+        return res.status(500).json({
+          code: 500,
+          success: false,
+          message: err.message,
+        });
+      }
+    }
+  }
+  static async applyJob(req, res) {
+    if (!req.params.id || !req.body.job_seeker_id) {
+      return res.status(400).json({
+        code: 400,
+        success: false,
+        message: "id or job_seeker_id not supplied",
+      });
+    } else {
+      try {
+        const apply = await JobApply.create({
+          job_id: req.params.id,
+          job_seeker_id: req.body.job_seeker_id,
+        });
+        const saveStatus = await JobApplyStatus.create({
+          job_apply_id: apply.id,
+          status: "pending",
+        });
+        return res.status(200).json({
+          code: 200,
+          success: true,
+          message: "Job Applied!",
         });
       } catch (err) {
         console.error(err);
