@@ -4,5 +4,6 @@ const JobController = require("@controllers/job-seeker/JobController");
 // Routing jobs disini
 
 router.get("/:id", JobController.getJobDetails);
+router.post("/:id", JobController.applyJob);
 
 module.exports = router;
