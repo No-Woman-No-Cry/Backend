@@ -132,19 +132,34 @@ class JobController {
       });
     } else {
       try {
-        const apply = await JobApply.create({
-          job_id: req.params.id,
-          job_seeker_id: req.body.job_seeker_id,
+        const checkIfApplied = await JobApply.findOne({
+          where: {
+            job_id: req.params.id,
+            job_seeker_id: req.body.job_seeker_id,
+          },
         });
-        const saveStatus = await JobApplyStatus.create({
-          job_apply_id: apply.id,
-          status: "pending",
-        });
-        return res.status(200).json({
-          code: 200,
-          success: true,
-          message: "Job Applied!",
-        });
+
+        if (checkIfApplied != null) {
+          return res.status(400).json({
+            code: 400,
+            success: false,
+            message: "Sorry, You have already applied",
+          });
+        } else {
+          const apply = await JobApply.create({
+            job_id: req.params.id,
+            job_seeker_id: req.body.job_seeker_id,
+          });
+          const saveStatus = await JobApplyStatus.create({
+            job_apply_id: apply.id,
+            status: "pending",
+          });
+          return res.status(200).json({
+            code: 200,
+            success: true,
+            message: "Job Applied!",
+          });
+        }
       } catch (err) {
         console.error(err);
         return res.status(500).json({
