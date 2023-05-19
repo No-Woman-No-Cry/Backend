@@ -65,7 +65,7 @@ module.exports = (sequelize, DataTypes) => {
           key: "id",
         },
       },
-      job_work_place: DataTypes.ENUM("office", "factory", "warehouse"),
+      job_work_place: DataTypes.ENUM("onsite", "remote", "hybird"),
       job_description: DataTypes.TEXT,
       job_requirements: DataTypes.TEXT,
     },
