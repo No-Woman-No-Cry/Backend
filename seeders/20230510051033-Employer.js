@@ -13,7 +13,6 @@ module.exports = {
       "Employers",
       [
         {
-          id: 1,
           username: "employer1",
           password: password,
           company_id: 1,
@@ -21,7 +20,6 @@ module.exports = {
           updated_at: new Date(),
         },
         {
-          id: 2,
           username: "employer2",
           password: password,
           company_id: 2,
@@ -29,7 +27,6 @@ module.exports = {
           updated_at: new Date(),
         },
         {
-          id: 3,
           username: "employer3",
           password: password,
           company_id: 3,
@@ -37,7 +34,6 @@ module.exports = {
           updated_at: new Date(),
         },
         {
-          id: 4,
           username: "employer4",
           password: password,
           company_id: 4,
@@ -45,7 +41,6 @@ module.exports = {
           updated_at: new Date(),
         },
         {
-          id: 5,
           username: "employer5",
           password: password,
           company_id: 5,

@@ -43,7 +43,7 @@ module.exports = {
         onDelete: "CASCADE",
       },
       job_work_place: {
-        type: Sequelize.ENUM("office", "factory", "warehouse"),
+        type: Sequelize.ENUM("onsite", "remote", "hybird"),
       },
       job_description: {
         type: Sequelize.TEXT,

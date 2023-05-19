@@ -1,8 +1,8 @@
-'use strict';
+"use strict";
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
+  async up(queryInterface, Sequelize) {
     await queryInterface.sequelize.query(
       `ALTER SEQUENCE "JobCategories_id_seq" RESTART WITH 1`
     );
@@ -11,59 +11,51 @@ module.exports = {
       "JobCategories",
       [
         {
-          id: 1,
-          category_name: 'IT',
+          category_name: "IT",
           created_at: new Date(),
           updated_at: new Date(),
         },
         {
-          id: 2,
-          category_name: 'Marketing',
+          category_name: "Marketing",
           created_at: new Date(),
           updated_at: new Date(),
         },
         {
-          id: 3,
-          category_name: 'Finance',
+          category_name: "Finance",
           created_at: new Date(),
           updated_at: new Date(),
         },
         {
-          id: 4,
-          category_name: 'Design',
+          category_name: "Design",
           created_at: new Date(),
           updated_at: new Date(),
         },
         {
-          id: 5,
-          category_name: 'Sales',
+          category_name: "Sales",
           created_at: new Date(),
           updated_at: new Date(),
         },
         {
-          id: 6,
-          category_name: 'Education',
+          category_name: "Education",
           created_at: new Date(),
           updated_at: new Date(),
         },
         {
-          id: 7,
-          category_name: 'Human Resources',
+          category_name: "Human Resources",
           created_at: new Date(),
           updated_at: new Date(),
         },
         {
-          id: 8,
-          category_name: 'Art & Design',
+          category_name: "Art & Design",
           created_at: new Date(),
           updated_at: new Date(),
-        }
+        },
       ],
       {}
     );
   },
 
-  async down (queryInterface, Sequelize) {
+  async down(queryInterface, Sequelize) {
     await queryInterface.bulkDelete("JobCategories", null, {});
-  }
-}
+  },
+};
