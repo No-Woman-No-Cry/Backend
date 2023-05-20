@@ -9,7 +9,6 @@ module.exports = {
     await queryInterface.sequelize.query(`DELETE FROM "Companies"`);
     await queryInterface.bulkInsert("Companies", [
       {
-        id: 1,
         company_icon: "https://example.com/logo1.png",
         company_name: "PT Example 1",
         description:
@@ -24,7 +23,6 @@ module.exports = {
         updated_at: "2021-01-01 00:00:00",
       },
       {
-        id: 2,
         company_icon: "https://example.com/logo2.png",
         company_name: "PT Example 2",
         description:
@@ -39,7 +37,6 @@ module.exports = {
         updated_at: "2021-01-01 00:00:00",
       },
       {
-        id: 3,
         company_icon: "https://example.com/logo3.png",
         company_name: "PT Example 3",
         description:
@@ -54,7 +51,6 @@ module.exports = {
         updated_at: "2021-01-01 00:00:00",
       },
       {
-        id: 4,
         company_icon: "https://example.com/logo.png",
         company_name: "PT. Example",
         description: "Perusahaan yang bergerak di bidang teknologi informasi",
@@ -68,7 +64,6 @@ module.exports = {
         updated_at: "2022-05-11 10:00:00",
       },
       {
-        id: 5,
         company_icon: "https://example.com/logo2.png",
         company_name: "PT. Contoh",
         description: "Perusahaan yang bergerak di bidang manufaktur",
@@ -82,7 +77,6 @@ module.exports = {
         updated_at: "2022-05-12 11:00:00",
       },
       {
-        id: 6,
         company_icon: "https://example.com/company1-icon.png",
         company_name: "Company 1",
         description: "This is a description for Company 1",
@@ -96,7 +90,6 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        id: 7,
         company_icon: "https://example.com/company2-icon.png",
         company_name: "Company 2",
         description: "This is a description for Company 2",
@@ -110,7 +103,6 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        id: 8,
         company_icon: "https://example.com/company3-icon.png",
         company_name: "Company 3",
         description: "This is a description for Company 3",
@@ -124,7 +116,6 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        id: 9,
         company_icon: "https://example.com/company4-icon.png",
         company_name: "Company 4",
         description: "This is a description for Company 4",
@@ -138,7 +129,6 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        id: 10,
         company_icon: "https://example.com/company5-icon.png",
         company_name: "Company 5",
         description: "This is a description for Company 5",

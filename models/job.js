@@ -20,6 +20,17 @@ module.exports = (sequelize, DataTypes) => {
         as: "jobType",
         foreignKey: "job_id",
       });
+      this.belongsToMany(models.JobExperience, {
+        through: models.JobExperienceRequirement,
+        as: "jobExperience",
+        foreignKey: "job_id",
+      });
+      this.belongsToMany(models.Skill, {
+        through: models.JobSkill,
+        as: "skill",
+        foreignKey: "job_id",
+      });
+      this.hasMany(models.JobApply, { foreignKey: "job_id" });
     }
   }
   Job.init(
@@ -54,7 +65,7 @@ module.exports = (sequelize, DataTypes) => {
           key: "id",
         },
       },
-      job_work_place: DataTypes.ENUM("office", "factory", "warehouse"),
+      job_work_place: DataTypes.ENUM("onsite", "remote", "hybird"),
       job_description: DataTypes.TEXT,
       job_requirements: DataTypes.TEXT,
     },

@@ -1,5 +1,8 @@
 "use strict";
 const { Model } = require("sequelize");
+const Job = require("./job");
+const Skill = require("./skill");
+
 module.exports = (sequelize, DataTypes) => {
   class JobSkill extends Model {
     /**
@@ -18,13 +21,27 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         autoIncrement: true,
       },
-      skill_id: DataTypes.BIGINT,
-      job_id: DataTypes.BIGINT,
+      skill_id: {
+        type: DataTypes.BIGINT,
+        allowNull: false,
+        references: {
+          model: Skill,
+          key: "id",
+        },
+      },
+      job_id: {
+        type: DataTypes.BIGINT,
+        allowNull: false,
+        references: {
+          model: Job,
+          key: "id",
+        },
+      },
     },
     {
       sequelize,
       modelName: "JobSkill",
-      tableName: "JobSkill",
+      tableName: "JobSkills",
       underscored: true,
     }
   );

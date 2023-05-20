@@ -6,12 +6,27 @@ class EducationController {
     const { profile_id } = req.params;
 
     try {
-      const education = await Educations.findByPk(profile_id);
+      const educations = await Educations.findAll({
+        where: {
+          job_seeker_id: profile_id,
+        },
+        attributes: ["id", "name", "degree", "major", "start", "end"],
+      });
+      const transformedEducation = educations.map((education) => {
+        return {
+          education_id: education.id,
+          name: education.name,
+          degree: education.degree,
+          major: education.major,
+          start: education.start,
+          end: education.end,
+        };
+      });
       return res.status(200).json({
         code: 200,
         success: true,
         message: "Education Info Fetched",
-        data: education,
+        data: transformedEducation,
       });
     } catch (error) {
       console.error("Error:", error);
@@ -46,11 +61,10 @@ class EducationController {
 
   // Mengupdate data pendidikan berdasarkan ID
   static async updateEducationById(req, res) {
-    const { profile_id } = req.params;
-    const { name, degree, major, start, end } = req.body;
+    const { education_id, name, degree, major, start, end } = req.body;
 
     try {
-      const education = await Educations.findByPk(profile_id);
+      const education = await Educations.findByPk(education_id);
       if (education) {
         await education.update({ name, degree, major, start, end });
         return res.status(200).json({
@@ -72,16 +86,16 @@ class EducationController {
 
   // Menghapus data pendidikan berdasarkan ID
   static async deleteEducationById(req, res) {
-    const { profile_id } = req.params;
+    const { education_id } = req.body;
 
     try {
-      const education = await Educations.findByPk(profile_id);
+      const education = await Educations.findByPk(education_id);
       if (education) {
         await education.destroy();
         return res.status(200).json({
           code: 200,
           success: true,
-          message: "Education deleted successfully",
+          message: "Education deleted",
         });
       }
       return res.status(404).json({

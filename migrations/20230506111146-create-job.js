@@ -43,7 +43,7 @@ module.exports = {
         onDelete: "CASCADE",
       },
       job_work_place: {
-        type: Sequelize.ENUM("office", "factory", "warehouse"),
+        type: Sequelize.ENUM("onsite", "remote", "hybird"),
       },
       job_description: {
         type: Sequelize.TEXT,
@@ -96,5 +96,8 @@ module.exports = {
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable("Jobs");
+    await queryInterface.sequelize.query(
+      'DROP TYPE IF EXISTS "enum_Jobs_job_work_place"'
+    );
   },
 };
