@@ -9,6 +9,7 @@ const main = require("./job-seeker/main_page/index");
 const companies = require("./job-seeker/companies_list/index");
 const jobs = require("./job-seeker/jobs/index");
 const notification_user = require("./job-seeker/notification/index");
+const history = require("./job-seeker/history/index");
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -25,6 +26,7 @@ app.use("/main", main);
 app.use("/companies", companies);
 app.use("/jobs", jobs);
 app.use("/notification", notification_user);
+app.use("/history", history);
 
 // Route for Company
 

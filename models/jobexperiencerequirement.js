@@ -1,5 +1,7 @@
 "use strict";
 const { Model } = require("sequelize");
+const Job = require("./job");
+const JobExperience = require("./jobexperience");
 module.exports = (sequelize, DataTypes) => {
   class JobExperienceRequirement extends Model {
     /**
@@ -18,8 +20,22 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         autoIncrement: true,
       },
-      job_id: DataTypes.BIGINT,
-      job_experience_id: DataTypes.BIGINT,
+      job_id: {
+        type: DataTypes.BIGINT,
+        allowNull: false,
+        references: {
+          model: Job,
+          key: "id",
+        },
+      },
+      job_experience_id: {
+        type: DataTypes.BIGINT,
+        allowNull: false,
+        references: {
+          model: JobExperience,
+          key: "id",
+        },
+      },
     },
     {
       sequelize,
