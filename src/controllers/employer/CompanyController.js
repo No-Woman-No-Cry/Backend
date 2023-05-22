@@ -1,6 +1,8 @@
 const Company = require("@models").Company;
 const Benefit = require("@models").Benefit;
 const CompanyBenefits = require("@models").CompanyBenefits;
+const Industry = require("@models").Industry;
+const CompanyIndustry = require("@models").CompanyIndustry;
 class CompanyController {
   static async getCompanyBasicInfo(req, res) {
     try {
@@ -121,6 +123,55 @@ class CompanyController {
         code: 200,
         success: true,
         message: "My Company Benefits Added",
+      });
+    } catch (err) {
+      return res.status(500).json({
+        error: err.message,
+      });
+    }
+  }
+  static async getCompanyIndustry(req, res) {
+    const { company_id } = req.params;
+    try {
+      const data = await Company.findByPk(company_id, {
+        include: [
+          {
+            model: Industry,
+            as: "industry",
+            attributes: ["industry_name"],
+          },
+        ],
+      });
+      return res.json({
+        code: 200,
+        success: true,
+        message: "My Company Industries Fetched",
+        data: data.industry.map((ind) => {
+          return {
+            id: ind.id,
+            name: ind.industry_name,
+          };
+        }),
+      });
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
+  }
+  static async addCompanyIndustry(req, res) {
+    const company_id = req.params.company_id;
+    const industry_id = req.body.industry_id;
+
+    try {
+      for (let i = 0; i < industry_id.length; i++) {
+        await CompanyIndustry.create({
+          company_id: company_id,
+          industry_id: industry_id[i],
+        });
+      }
+      return res.json({
+        code: 200,
+        success: true,
+        message: "My Company Industries Added",
       });
     } catch (err) {
       return res.status(500).json({
