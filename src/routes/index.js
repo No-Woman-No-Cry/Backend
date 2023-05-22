@@ -1,7 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
-const cors = require("cors");
+
 // Variables for job seeker
 const globalMiddleware = require("@middleware/globalMiddleware");
 const auth = require("./job-seeker/authentication");
@@ -17,7 +17,6 @@ const employer_jobs = require("./employer/my-jobs");
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(cors());
 
 // Routes for Job Seeker
 app.use("/auth", auth);
