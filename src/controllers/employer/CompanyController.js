@@ -1,27 +1,31 @@
 const Company = require("@models").Company;
 class CompanyController {
-  static async getBasicInfoCompany(req, res) {
-    const { company_id } = req.params;
-    const data = await Company.findByPk(company_id);
-    const transformedData = {
-      company_icon: data.company_icon,
-      company_name: data.company_name,
-      description: data.description,
-      location: data.location,
-      company_size: data.company_size,
-      email: data.email,
-      whatsapp_number: data.whatsapp_number,
-      working_place: data.working_place,
-      website_url: data.website_url,
-    };
-    return res.json({
-      code: 200,
-      success: true,
-      message: "Basic Info Fetched",
-      data: transformedData,
-    });
+  static async getCompanyBasicInfo(req, res) {
+    try {
+      const { company_id } = req.params;
+      const data = await Company.findByPk(company_id);
+      const transformedData = {
+        company_icon: data.company_icon,
+        company_name: data.company_name,
+        description: data.description,
+        location: data.location,
+        company_size: data.company_size,
+        email: data.email,
+        whatsapp_number: data.whatsapp_number,
+        working_place: data.working_place,
+        website_url: data.website_url,
+      };
+      return res.json({
+        code: 200,
+        success: true,
+        message: "Basic Info Fetched",
+        data: transformedData,
+      });
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
   }
-  static async updateBasicInfoCompany(req, res) {
+  static async updateCompanyBasicInfo(req, res) {
     const companyId = req.params.company_id; // ID perusahaan yang akan diupdate
     const {
       company_icon_url,
@@ -71,6 +75,8 @@ class CompanyController {
       return res.status(500).json({ error: error.message });
     }
   }
+  static async getCompanyBenefit(req, res) {}
+  static async updateCompanyBenefit(req, res) {}
 }
 
 module.exports = CompanyController;

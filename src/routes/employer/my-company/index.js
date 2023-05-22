@@ -7,7 +7,10 @@ const CompanyController = require("@controllers/employer/CompanyController");
 router.get("/benefit/benefits", BenefitController.getAllBenefit);
 router.get("/industry/industries", IndustryController.getAllIndustry);
 
-router.get("/basic/:company_id", CompanyController.getBasicInfoCompany);
-router.put("/basic/:company_id", CompanyController.updateBasicInfoCompany);
+router.get("/basic/:company_id", CompanyController.getCompanyBasicInfo);
+router.put("/basic/:company_id", CompanyController.updateCompanyBasicInfo);
+
+router.get("/benefit/:company_id", CompanyController.getCompanyBenefit);
+router.put("/benefit/:company_id", CompanyController.updateCompanyBenefit);
 
 module.exports = router;
