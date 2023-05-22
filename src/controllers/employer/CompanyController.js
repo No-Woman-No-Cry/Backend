@@ -1,5 +1,6 @@
 const Company = require("@models").Company;
 class CompanyController {
+
   static async getCompanyBasicInfo(req, res) {
     try {
       const { company_id } = req.params;
@@ -75,8 +76,10 @@ class CompanyController {
       return res.status(500).json({ error: error.message });
     }
   }
+
   static async getCompanyBenefit(req, res) {}
   static async updateCompanyBenefit(req, res) {}
+
 }
 
 module.exports = CompanyController;
