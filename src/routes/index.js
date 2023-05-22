@@ -1,7 +1,9 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
+
 const cors = require("cors");
+
 // Variables for job seeker
 const globalMiddleware = require("@middleware/globalMiddleware");
 const auth = require("./job-seeker/authentication");
