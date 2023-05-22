@@ -1,4 +1,6 @@
 const Company = require("@models").Company;
+const Benefit = require("@models").Benefit;
+const CompanyBenefits = require("@models").CompanyBenefits;
 class CompanyController {
   static async getCompanyBasicInfo(req, res) {
     try {
@@ -26,7 +28,7 @@ class CompanyController {
     }
   }
   static async updateCompanyBasicInfo(req, res) {
-    const companyId = req.params.company_id; // ID perusahaan yang akan diupdate
+    const company_id = req.params.company_id; // ID perusahaan yang akan diupdate
     const {
       company_icon_url,
       company_name,
@@ -41,7 +43,7 @@ class CompanyController {
 
     try {
       // Cari perusahaan berdasarkan ID
-      const company = await Company.findByPk(companyId);
+      const company = await Company.findByPk(company_id);
 
       // Periksa apakah perusahaan ditemukan
       if (!company) {
@@ -76,8 +78,56 @@ class CompanyController {
     }
   }
 
-  static async getCompanyBenefit(req, res) {}
-  static async updateCompanyBenefit(req, res) {}
+  static async getCompanyBenefit(req, res) {
+    const { company_id } = req.params;
+    try {
+      const data = await Company.findByPk(company_id, {
+        include: [
+          {
+            model: Benefit,
+            as: "benefit",
+            attributes: ["benefit_name", "icon"],
+          },
+        ],
+      });
+      return res.json({
+        code: 200,
+        success: true,
+        message: "My Company Benefits Fetched",
+        data: data.benefit.map((ben) => {
+          return {
+            id: ben.id,
+            name: ben.benefit_name,
+            icon: ben.icon,
+          };
+        }),
+      });
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
+  }
+  static async addCompanyBenefit(req, res) {
+    const company_id = req.params.company_id;
+    const benefit_id = req.body.benefit_id;
+
+    try {
+      for (let i = 0; i < benefit_id.length; i++) {
+        await CompanyBenefits.create({
+          company_id: company_id,
+          benefit_id: benefit_id[i],
+        });
+      }
+      return res.json({
+        code: 200,
+        success: true,
+        message: "My Company Benefits Added",
+      });
+    } catch (err) {
+      return res.status(500).json({
+        error: err.message,
+      });
+    }
+  }
 }
 
 module.exports = CompanyController;

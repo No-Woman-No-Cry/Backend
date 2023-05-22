@@ -11,6 +11,6 @@ router.get("/basic/:company_id", CompanyController.getCompanyBasicInfo);
 router.put("/basic/:company_id", CompanyController.updateCompanyBasicInfo);
 
 router.get("/benefit/:company_id", CompanyController.getCompanyBenefit);
-router.put("/benefit/:company_id", CompanyController.updateCompanyBenefit);
+router.post("/benefit/:company_id", CompanyController.addCompanyBenefit);
 
 module.exports = router;
