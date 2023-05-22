@@ -1,8 +1,10 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
 require("module-alias/register");
 const routes = require("./src/routes/index.js");
 
+app.use(cors());
 app.use(routes);
 
 // Start server
