@@ -38,5 +38,5 @@ app.use("/history", history);
 // Route for Company
 app.use("/employer/my-company", employer_company);
 app.use("/employer/my-jobs", employer_jobs);
-// app.use("/employer/profile", employer_auth);
+
 module.exports = app;
