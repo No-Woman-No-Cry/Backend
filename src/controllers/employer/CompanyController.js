@@ -75,6 +75,7 @@ class CompanyController {
       return res.status(500).json({ error: error.message });
     }
   }
+
   static async getCompanyBenefit(req, res) {}
   static async updateCompanyBenefit(req, res) {}
 }
