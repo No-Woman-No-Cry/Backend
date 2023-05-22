@@ -78,6 +78,10 @@ class CompanyController {
 
   static async getCompanyBenefit(req, res) {}
   static async updateCompanyBenefit(req, res) {}
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1d3ae3248abd4b5a1522cc234ab5655de3e2f40f
 }
 
 module.exports = CompanyController;
