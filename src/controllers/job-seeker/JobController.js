@@ -1,4 +1,5 @@
 const Job = require("@models").Job;
+const JobSeeker = require("@models").JobSeeker;
 const JobType = require("@models").JobType;
 const JobSalary = require("@models").JobSalary;
 const JobExperience = require("@models").JobExperience;
@@ -8,6 +9,8 @@ const Company = require("@models").Company;
 const Skill = require("@models").Skill;
 const Benefit = require("@models").Benefit;
 const Industry = require("@models").Industry;
+const Employer = require("@models").Employer;
+const EmployerNotification = require("@models").EmployerNotification;
 
 class JobController {
   static async getJobDetails(req, res) {
@@ -153,6 +156,24 @@ class JobController {
           const saveStatus = await JobApplyStatus.create({
             job_apply_id: apply.id,
             status: "pending",
+          });
+          const getJob = await Job.findByPk(req.params.id, {
+            include: [
+              {
+                model: Company,
+                include: [
+                  {
+                    model: Employer,
+                  },
+                ],
+              },
+            ],
+          });
+          const sendNotificationToEmployer = await EmployerNotification.create({
+            employer_id: getJob.Company.Employer.id,
+            notification_message: `Pekerjaan ${getJob.job_position} yang anda post dilamar seseorang`,
+            notification_date: new Date(),
+            is_read: false,
           });
           return res.status(200).json({
             code: 200,
