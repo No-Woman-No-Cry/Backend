@@ -16,6 +16,7 @@ const history = require("./job-seeker/history");
 const employer_auth = require("./employer/authentication");
 const employer_company = require("./employer/my-company");
 const employer_jobs = require("./employer/my-jobs");
+const employer_job_seeker = require("./employer/job-seeker");
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -38,5 +39,6 @@ app.use("/history", history);
 // Route for Company
 app.use("/employer/my-company", employer_company);
 app.use("/employer/my-jobs", employer_jobs);
+app.use("/employer/job-seeker", employer_job_seeker);
 
 module.exports = app;
