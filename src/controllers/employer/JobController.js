@@ -233,7 +233,7 @@ class JobController {
           },
         ],
       });
-
+      
       const update_status = await JobApplyStatus.update(
         {
           status: status,
@@ -244,6 +244,7 @@ class JobController {
           },
         }
       );
+
       const getUser = await JobSeeker.findByPk(profile_id, {
         include: [
           {
@@ -260,14 +261,13 @@ class JobController {
         }`,
         notification_date: new Date(),
         is_read: false,
-      });
+      })
       return res.status(200).json({
         code: 200,
         success: true,
         message: "Status changed",
       });
     } catch (err) {
-      console.log(err);
       return res.status(500).json({ error: err.message });
     }
   }
