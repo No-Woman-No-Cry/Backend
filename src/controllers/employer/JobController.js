@@ -12,6 +12,8 @@ const JobType = require("@models").JobType;
 const JobTypeRequirement = require("@models").JobTypeRequirement;
 const JobSalary = require("@models").JobSalary;
 const Skill = require("@models").Skill;
+const User = require("@models").User;
+const UserNotifications = require("@models").UserNotifications;
 const { Op } = require("sequelize");
 
 class JobController {
@@ -220,7 +222,18 @@ class JobController {
           job_id: job_id,
           job_seeker_id: profile_id,
         },
+        include: [
+          {
+            model: Job,
+            include: [
+              {
+                model: Company,
+              },
+            ],
+          },
+        ],
       });
+      
       const update_status = await JobApplyStatus.update(
         {
           status: status,
@@ -231,6 +244,24 @@ class JobController {
           },
         }
       );
+
+      const getUser = await JobSeeker.findByPk(profile_id, {
+        include: [
+          {
+            model: User,
+          },
+        ],
+      });
+      const sendNotificationToJobSeeker = await UserNotifications.create({
+        user_id: getUser.User.id,
+        notification_message: `Lamaran anda sebagai ${
+          job_apply.Job.job_position
+        } pada ${job_apply.Job.Company.company_name} di ${
+          status == "rejected" ? "ditolak" : "diterima"
+        }`,
+        notification_date: new Date(),
+        is_read: false,
+      })
       return res.status(200).json({
         code: 200,
         success: true,
