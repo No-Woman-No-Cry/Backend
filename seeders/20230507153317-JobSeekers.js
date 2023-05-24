@@ -12,23 +12,23 @@ module.exports = {
       [
         {
           user_id: 1,
-          fullname: "John Doe",
+          fullname: "Saqfa Alam Suwandi",
           job_seeker_headline: "Front-end developer",
-          whatsapp_number: "081234567890",
-          linkedin_url: "https://www.linkedin.com/in/johndoe/",
-          portofolio_url: "https://johndoe.github.io/portfolio",
+          whatsapp_number: "081288047852",
+          linkedin_url: "https://www.linkedin.com/in/saqfaalamsuwandi/",
+          portofolio_url: "https://github.com/saqfaalam",
           cv_url:
-            "https://drive.google.com/file/d/1a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p/view",
+            "https://drive.google.com/file/d/1GROorYEsB1fT4WHCxM2RVxCt1AqUyB6v/view?usp=drive_link",
           created_at: new Date(),
           updated_at: new Date(),
         },
         {
           user_id: 2,
-          fullname: "Jane Doe",
+          fullname: "Ridho Pujiono",
           job_seeker_headline: "Full-stack developer",
-          whatsapp_number: "081234567890",
-          linkedin_url: "https://www.linkedin.com/in/janedoe/",
-          portofolio_url: "https://janedoe.github.io/portfolio",
+          whatsapp_number: "081244521578",
+          linkedin_url: "https://www.linkedin.com/in/ridho-pujiono-81843221a/",
+          portofolio_url: "https://github.com/ridhopujiono",
           cv_url:
             "https://drive.google.com/file/d/1a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p/view",
           created_at: new Date(),
