@@ -13,13 +13,13 @@ module.exports = {
       "Users",
       [
         {
-          email: "johndoe@example.com",
+          email: "saqfaalam18@gmail.com",
           password: password,
           created_at: new Date(),
           updated_at: new Date(),
         },
         {
-          email: "janedoe@example.com",
+          email: "ridhopujiono2@gmail.com",
           password: password,
           created_at: new Date(),
           updated_at: new Date(),
