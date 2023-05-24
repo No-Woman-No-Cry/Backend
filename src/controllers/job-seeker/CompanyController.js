@@ -26,7 +26,7 @@ class CompanyPage {
           company_name: d.company_name,
           industry: d.industry[0].industry_name,
           job_total: d.Jobs.length,
-          icon: d.icon,
+          icon: d.company_icon,
         };
       });
 
