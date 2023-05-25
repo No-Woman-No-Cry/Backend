@@ -1,5 +1,6 @@
 const Company = require("@models").Company;
 const Job = require("@models").Job;
+const JobSkill = require("@models").JobSkill;
 const JobSeeker = require("@models").JobSeeker;
 const JobCategory = require("@models").JobCategory;
 const JobApply = require("@models").JobApply;
@@ -233,7 +234,7 @@ class JobController {
           },
         ],
       });
-      
+
       const update_status = await JobApplyStatus.update(
         {
           status: status,
@@ -261,7 +262,7 @@ class JobController {
         }`,
         notification_date: new Date(),
         is_read: false,
-      })
+      });
       return res.status(200).json({
         code: 200,
         success: true,
@@ -283,6 +284,7 @@ class JobController {
         job_requirement,
         job_type,
         job_experience_requirement,
+        skill_id,
       } = req.body;
 
       const insertJob = await Job.create({
@@ -323,6 +325,13 @@ class JobController {
         await JobExperienceRequirement.create({
           job_id: insertJob.id,
           job_experience_id: getExperienceId[i].id,
+        });
+      }
+      // Insert ke ke Skill table
+      for (let i = 0; i < skill_id.length; i++) {
+        await JobSkill.create({
+          job_id: insertJob.id,
+          skill_id: skill_id[i],
         });
       }
       return res.status(200).json({
