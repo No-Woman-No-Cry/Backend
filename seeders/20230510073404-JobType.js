@@ -25,11 +25,6 @@ module.exports = {
           created_at: new Date(),
           updated_at: new Date(),
         },
-        {
-          job_type_name: "fulltime",
-          created_at: new Date(),
-          updated_at: new Date(),
-        },
       ],
       {}
     );
