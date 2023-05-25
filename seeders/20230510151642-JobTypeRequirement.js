@@ -27,12 +27,6 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        job_id: 4,
-        job_type_id: 4,
-        created_at: new Date(),
-        updated_at: new Date(),
-      },
-      {
         job_id: 5,
         job_type_id: 1,
         created_at: new Date(),
@@ -47,12 +41,6 @@ module.exports = {
       {
         job_id: 7,
         job_type_id: 2,
-        created_at: new Date(),
-        updated_at: new Date(),
-      },
-      {
-        job_id: 8,
-        job_type_id: 4,
         created_at: new Date(),
         updated_at: new Date(),
       },
