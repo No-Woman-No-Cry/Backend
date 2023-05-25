@@ -33,12 +33,6 @@ module.exports = {
         updated_at: new Date(),
       },
       {
-        skill_id: 4,
-        job_id: 2,
-        created_at: new Date(),
-        updated_at: new Date(),
-      },
-      {
         skill_id: 8,
         job_id: 3,
         created_at: new Date(),
