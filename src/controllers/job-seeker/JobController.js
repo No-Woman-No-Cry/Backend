@@ -137,8 +137,8 @@ class JobController {
       try {
         const checkIfApplied = await JobApply.findOne({
           where: {
-            job_id: req.params.id,
-            job_seeker_id: req.body.job_seeker_id,
+            job_id: parseInt(req.params.id),
+            job_seeker_id: parseInt(req.body.job_seeker_id),
           },
         });
 
