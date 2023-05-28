@@ -1,4 +1,4 @@
-const { JobCategory } = require("@models"); // Import model JobCategory
+const { JobCategory } = require("@models"); // Import model Benefit
 
 class CategoryController {
   static async getAllCategory(req, res) {
